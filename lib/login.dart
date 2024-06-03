@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
+// Main login screen widget
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -8,10 +9,13 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+// State for the login screen
 class _LoginScreenState extends State<LoginScreen> {
+  // Controllers for the username and password input fields
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  // Rive animation controllers
   StateMachineController? controller;
   SMIInput<bool>? isChecking;
   SMIInput<bool>? isHandsUp;
@@ -20,37 +24,36 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size; // Get the screen size
     return Scaffold(
-      backgroundColor: const Color(0xffD6E2EA),
+      backgroundColor: const Color(0xffD6E2EA), // Set background color
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12.0), // Add padding around the main content
           child: SizedBox(
-            width: size.width,
-            height: size.height,
+            width: size.width, // Use full width of the screen
+            height: size.height, // Use full height of the screen
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 30,
+                const SizedBox(
+                  height: 30, // Add some space at the top
                 ),
-                Text(
-                  "Welcome to \nAll In One ToolKit Pro",
+                const Text(
+                  "Welcome to \nAll In One ToolKit Pro", // Welcome text
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.center, // Center align the text
                 ),
                 SizedBox(
                   width: double.infinity,
                   height: 320,
                   child: RiveAnimation.asset(
-                    'images/animated_login_character.riv',
-                    stateMachines: const ['Login Machine'],
+                    'images/animated_login_character.riv', // Path to the Rive animation asset
+                    stateMachines: const ['Login Machine'], // Name of the state machine in the Rive file
                     onInit: (artboard) {
+                      // Initialize the Rive animation controllers
                       controller = StateMachineController.fromArtboard(
                           artboard, 'Login Machine');
 
@@ -66,8 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextField(
-                  controller: usernameController,
+                  controller: usernameController, // Bind the username controller
                   onChanged: (value) {
+                    // Update Rive animation state on text change
                     if (isHandsUp != null) {
                       isHandsUp!.change(false);
                     }
@@ -76,21 +80,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       isChecking!.change(true);
                     }
                   },
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.emailAddress, // Set keyboard type to email
                   decoration: InputDecoration(
-                    hintText: "E mail",
-                    prefixIcon: const Icon(Icons.mail),
+                    hintText: "E mail", // Hint text for the input field
+                    prefixIcon: const Icon(Icons.mail), // Icon for the input field
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12), // Rounded border
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
+                const SizedBox(
+                  height: 10, // Add space between input fields
                 ),
                 TextField(
-                  controller: passwordController,
+                  controller: passwordController, // Bind the password controller
                   onChanged: (value) {
+                    // Update Rive animation state on text change
                     if (isChecking != null) {
                       isChecking!.change(false);
                     }
@@ -99,22 +104,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       isHandsUp!.change(true);
                     }
                   },
-                  obscureText: true, // to hide password
+                  obscureText: true, // Hide password
                   decoration: InputDecoration(
-                    hintText: "Password",
-                    prefixIcon: const Icon(Icons.lock),
+                    hintText: "Password", // Hint text for the input field
+                    prefixIcon: const Icon(Icons.lock), // Icon for the input field
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12), // Rounded border
                     ),
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 5), // Add a bit of space
                 SizedBox(
-                  width: size.width,
+                  width: size.width, // Full width for the button
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {}, // Forgot password action
                       child: const Text(
                         "Forgot your password?",
                         textAlign: TextAlign.right,
@@ -127,6 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 MaterialButton(
                   onPressed: () {
+                    // Login button action
                     if (isChecking != null) {
                       isChecking!.change(false);
                     }
@@ -137,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     print(usernameController.text);
 
+                    // Check login credentials
                     if (usernameController.text == "admin" &&
                         passwordController.text == "12345") {
                       if (trigFail != null) {
@@ -152,29 +159,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       trigFail!.change(true);
                     }
                   },
-                  minWidth: size.width,
-                  height: 50,
-                  color: const Color.fromARGB(159, 152, 22, 100),
+                  minWidth: size.width, // Full width for the button
+                  height: 50, // Set height for the button
+                  color: const Color.fromARGB(159, 152, 22, 100), // Button color
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Text(
+                      borderRadius: BorderRadius.circular(12)), // Rounded corners
+                  child: const Text(
                     "Login",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.white, // Text color
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 10), // Add space
                 SizedBox(
-                  width: size.width,
+                  width: size.width, // Full width
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text("Don't you have an account?"),
                       TextButton(
                         onPressed: () {
+                          // Register button action
                           // todo register
                         },
                         child: const Text(
