@@ -29,7 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: const Color(0xffD6E2EA), // Set background color
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(12.0), // Add padding around the main content
+          padding:
+              const EdgeInsets.all(12.0), // Add padding around the main content
           child: SizedBox(
             width: size.width, // Use full width of the screen
             height: size.height, // Use full height of the screen
@@ -50,8 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 320,
                   child: RiveAnimation.asset(
-                    'images/animated_login_character.riv', // Path to the Rive animation asset
-                    stateMachines: const ['Login Machine'], // Name of the state machine in the Rive file
+                    'images/animation/animation.riv', // Path to the Rive animation asset
+                    stateMachines: const [
+                      'Login Machine'
+                    ], // Name of the state machine in the Rive file
                     onInit: (artboard) {
                       // Initialize the Rive animation controllers
                       controller = StateMachineController.fromArtboard(
@@ -69,7 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextField(
-                  controller: usernameController, // Bind the username controller
+                  controller:
+                      usernameController, // Bind the username controller
                   onChanged: (value) {
                     // Update Rive animation state on text change
                     if (isHandsUp != null) {
@@ -80,10 +84,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       isChecking!.change(true);
                     }
                   },
-                  keyboardType: TextInputType.emailAddress, // Set keyboard type to email
+                  keyboardType:
+                      TextInputType.emailAddress, // Set keyboard type to email
                   decoration: InputDecoration(
                     hintText: "E mail", // Hint text for the input field
-                    prefixIcon: const Icon(Icons.mail), // Icon for the input field
+                    prefixIcon:
+                        const Icon(Icons.mail), // Icon for the input field
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12), // Rounded border
                     ),
@@ -93,7 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 10, // Add space between input fields
                 ),
                 TextField(
-                  controller: passwordController, // Bind the password controller
+                  controller:
+                      passwordController, // Bind the password controller
                   onChanged: (value) {
                     // Update Rive animation state on text change
                     if (isChecking != null) {
@@ -107,28 +114,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true, // Hide password
                   decoration: InputDecoration(
                     hintText: "Password", // Hint text for the input field
-                    prefixIcon: const Icon(Icons.lock), // Icon for the input field
+                    prefixIcon:
+                        const Icon(Icons.lock), // Icon for the input field
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12), // Rounded border
                     ),
                   ),
                 ),
-                const SizedBox(height: 5), // Add a bit of space
-                SizedBox(
-                  width: size.width, // Full width for the button
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {}, // Forgot password action
-                      child: const Text(
-                        "Forgot your password?",
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Colors.black),
-                      ),
-                    ),
-                  ),
+                const SizedBox(
+                  height: 10,
                 ),
                 MaterialButton(
                   onPressed: () {
@@ -161,9 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   minWidth: size.width, // Full width for the button
                   height: 50, // Set height for the button
-                  color: const Color.fromARGB(159, 152, 22, 100), // Button color
+                  color: const Color.fromARGB(159, 0, 25, 93), // Button color
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)), // Rounded corners
+                      borderRadius:
+                          BorderRadius.circular(12)), // Rounded corners
                   child: const Text(
                     "Login",
                     style: TextStyle(
